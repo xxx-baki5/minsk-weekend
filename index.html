@@ -51,6 +51,8 @@ p{margin:0}
   linear-gradient(45deg,transparent 35%,var(--red) 35% 65%,transparent 65%) 0 0/14px 14px;
   opacity:.9}
 .rushnik.thin{height:8px;background-size:8px 8px,8px 8px;opacity:.55}
+.egg{display:block;cursor:default}
+.egg:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 
 header.hero{background:var(--paper);padding-top:env(safe-area-inset-top,0px)}
 .hero .wrap{padding-block:28px 22px;display:grid;gap:12px}
@@ -274,7 +276,7 @@ footer .wrap{display:grid;gap:8px}
 </main>
 
 <footer>
-  <div class="rushnik thin"></div>
+  <a class="rushnik thin egg" href="game.html" aria-label="Секретная игра"></a>
   <div class="wrap" style="padding-top:14px">
     <p>Фото: Wikimedia Commons, лицензии CC BY / CC BY‑SA, авторы указаны на страницах файлов (ссылка «фото» на каждой карточке). Карта: © участники OpenStreetMap.</p>
     <p>Координаты указаны для навигации. У крупных объектов метка стоит у главного входа или в центре.</p>
@@ -538,6 +540,10 @@ document.addEventListener("click",e=>{
   setTimeout(()=>{map.invalidateSize();map.setView([p.lat,p.lon],15);markers[p.id].openPopup();},250);
 });
 initMap();
+
+/* пасхалка: 5 нажатий на заголовок */
+(()=>{let n=0,tm;const h=document.querySelector(".hero h1");
+  h.addEventListener("click",()=>{n++;clearTimeout(tm);tm=setTimeout(()=>n=0,1500);if(n>=5)location.href="game.html";});})();
 </script>
 </body>
 </html>
